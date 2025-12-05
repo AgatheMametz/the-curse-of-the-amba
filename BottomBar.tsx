@@ -40,3 +40,4 @@ export const BottomBar: React.FC<BottomBarProps> = ({ currentPage, onPageChange 
     </nav>
   );
 };
+

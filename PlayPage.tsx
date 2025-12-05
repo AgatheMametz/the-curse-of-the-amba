@@ -87,7 +87,8 @@ export const PlayPage: React.FC<PlayPageProps> = ({
           id: `explode-${Date.now()}`,
           row: move.row,
           col: move.col,
-          type: 'explode'
+          type: 'explode',
+          emoji: PIECE_TYPES['HAND'].emoji
         });
         // Effet poof sur les adjacents
         const adjacents = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
@@ -115,15 +116,18 @@ export const PlayPage: React.FC<PlayPageProps> = ({
           type: 'poof',
           emoji: PIECE_TYPES[currentPiece as PieceType]?.emoji
         });
-      } else {
+      } else if (targetPiece && targetPiece !== 'DISABLED') {
         // Poof normal sur la pièce mangée
-        newEffects.push({
-          id: `poof-${Date.now()}`,
-          row: move.row,
-          col: move.col,
-          type: 'poof',
-          emoji: PIECE_TYPES[targetPiece as PieceType]?.emoji
-        });
+        const pieceInfo = PIECE_TYPES[targetPiece as PieceType];
+        if (pieceInfo) {
+          newEffects.push({
+            id: `poof-${Date.now()}`,
+            row: move.row,
+            col: move.col,
+            type: 'poof',
+            emoji: pieceInfo.emoji
+          });
+        }
       }
     }
 
@@ -260,3 +264,4 @@ export const PlayPage: React.FC<PlayPageProps> = ({
     </div>
   );
 };
+

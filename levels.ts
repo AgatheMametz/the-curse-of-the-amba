@@ -190,3 +190,4 @@ export const loadProgress = (): GameProgress => {
 export const saveProgress = (progress: GameProgress) => {
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
 };
+

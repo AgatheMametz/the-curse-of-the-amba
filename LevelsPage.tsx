@@ -128,3 +128,4 @@ export const LevelsPage: React.FC<LevelsPageProps> = ({ progress, onSelectLevel 
     </div>
   );
 };
+

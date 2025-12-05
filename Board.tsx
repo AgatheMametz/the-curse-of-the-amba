@@ -74,12 +74,13 @@ export const Board: React.FC<BoardProps> = ({
                   {cellEffects.map((effect) => (
                     <div
                       key={effect.id}
-                      className={`absolute inset-0 flex items-center justify-center pointer-events-none z-20 ${
+                      className={`absolute inset-0 flex items-center justify-center pointer-events-none z-50 ${
                         effect.type === 'poof' ? 'animate-poof' : 'animate-explode'
                       }`}
+                      style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.8))' }}
                     >
                       <span className="text-3xl sm:text-4xl">
-                        {effect.type === 'explode' ? '💥' : (effect.emoji || '💨')}
+                        {effect.emoji}
                       </span>
                     </div>
                   ))}

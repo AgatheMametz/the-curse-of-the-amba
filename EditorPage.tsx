@@ -184,7 +184,8 @@ export const EditorPage: React.FC = () => {
           id: `explode-${Date.now()}`,
           row: move.row,
           col: move.col,
-          type: 'explode'
+          type: 'explode',
+          emoji: PIECE_TYPES['HAND'].emoji
         });
         const adjacents = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
         adjacents.forEach(([dr, dc]) => {
@@ -210,14 +211,17 @@ export const EditorPage: React.FC = () => {
           type: 'poof',
           emoji: PIECE_TYPES[currentPiece as PieceType]?.emoji
         });
-      } else {
-        newEffects.push({
-          id: `poof-${Date.now()}`,
-          row: move.row,
-          col: move.col,
-          type: 'poof',
-          emoji: PIECE_TYPES[targetPiece as PieceType]?.emoji
-        });
+      } else if (targetPiece && targetPiece !== 'DISABLED') {
+        const pieceInfo = PIECE_TYPES[targetPiece as PieceType];
+        if (pieceInfo) {
+          newEffects.push({
+            id: `poof-${Date.now()}`,
+            row: move.row,
+            col: move.col,
+            type: 'poof',
+            emoji: pieceInfo.emoji
+          });
+        }
       }
     }
 
